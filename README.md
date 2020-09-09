@@ -1,1 +1,1 @@
-# solo-project
+# Solo Project
