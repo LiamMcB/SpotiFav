@@ -7,13 +7,19 @@ class App extends Component {
     this.state = {
       isLoggedIn: false
     }
+    this.loginUser = this.loginUser.bind(this);
+  }
+
+  loginUser() {
+    // Fetch info from db
+    console.log("Logging in user");
   }
 
   render() {
     // If not logged in, render login page
     if (!this.state.isLoggedIn) {
       return (
-        <LoginContainer />
+        <LoginContainer loginUser={this.loginUser} />
       )
     // Else render web app
     } else {

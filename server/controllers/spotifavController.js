@@ -21,6 +21,12 @@ spotifavController.loginUser = (req, res, next) => {
     // Set cookie to show user is logged in
     res.cookie('user', 'loggedIn', { httpOnly: true });
     return next();
+  })
+    .catch(err => {
+      return next({
+        log: `error in spotifavController.loginUser: ${err}`,
+        message: { err: 'An error occurred' }
+      });
   });
 };
 
@@ -42,6 +48,12 @@ spotifavController.signupUser = (req, res, next) => {
     // Set cookie to show they are logged in
     res.cookie('user', 'loggedIn', { httpOnly: true });
     return next();
+  })
+  .catch(err => {
+    return next({
+      log: `error in spotifavController.signinUser: ${err}`,
+      message: { err: 'An error occurred' }
+    });
   });
 };
 

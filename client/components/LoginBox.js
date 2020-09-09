@@ -1,6 +1,7 @@
 import React from 'react';
 
 function LoginBox(props) {
+  const { loginUser } = props;
   return (
     <main className='login-box'>
       <div className='login d-flex justify-content-center align-items-center'>
@@ -11,7 +12,7 @@ function LoginBox(props) {
           <circle cx="8" cy="11" r="1"/>
         </svg>
       </div>
-      <form action="api/login" className='login-form' method="post">
+      <form onSubmit={loginUser} className='login-form' method="post">
         <div className="form-group">
             <input autoComplete="off" autoFocus className="form-control" name="username" placeholder="Username" type="text" />
         </div>
