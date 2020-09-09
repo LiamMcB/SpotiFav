@@ -3,11 +3,15 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const router = require('./routes');
+const cookieParser = require('cookie-parser')
 const PORT = 3000;
 
 // Parse request body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Parse cookies in requests
+app.use(cookieParser());
 
 // serve from build folder with route '/build'
 app.use('/build', express.static(path.join(__dirname, '../build')));
