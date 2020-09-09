@@ -4,8 +4,8 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: './client/index.js',
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'build')
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js'
   },
   module: {
     rules: [
@@ -23,6 +23,7 @@ module.exports = {
   },
   devServer: {
     publicPath: '/build/',
+    contentBase: path.join(__dirname, './client'),
     proxy: {
       '/api': 'http://localhost:3000'
     },
