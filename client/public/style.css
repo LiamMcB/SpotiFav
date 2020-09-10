@@ -28,3 +28,7 @@ html {
 .form-control {
   text-align: center;
 }
+
+.song-box {
+  margin: 1rem;
+}

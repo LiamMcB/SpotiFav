@@ -9,6 +9,7 @@ class MainContainer extends Component {
       favSongs: []
     }
     this.getFavs = this.getFavs.bind(this);
+    this.searchFavs = this.searchFavs.bind(this);
     this.getFavs();
   }
 
@@ -40,12 +41,16 @@ class MainContainer extends Component {
     })
     .catch(err => console.log(err));
   }
+
+  searchFavs() {
+    console.log("made it into searchFavs")
+  }
   
   render() {
     return (
       <div>
         <MainNav currentUser={this.props.currentUser} logoutUser={this.props.logoutUser} />
-        <MainBox userId={this.props.userId} favSongs={this.state.favSongs} />
+        <MainBox userId={this.props.userId} favSongs={this.state.favSongs} searchFavs={this.searchFavs} />
       </div>
     )
   }

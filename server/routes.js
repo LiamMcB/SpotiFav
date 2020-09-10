@@ -24,4 +24,10 @@ router.post('/getFavs', spotifavController.getFavs, (req, res) => {
   res.json(songs);
 })
 
+// Gets songs using Spotify's Web API
+router.post('/search', spotifavController.getToken, spotifavController.search, (req, res) => {
+  res.status(200);
+  res.json(res.locals.track);
+})
+
 module.exports = router;

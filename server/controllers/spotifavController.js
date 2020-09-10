@@ -1,4 +1,6 @@
 const db = require('../models/spotifavModels');
+const credentials = require('../models/spotifyKey');
+const SpotifyWebApi = require('spotify-web-api-node');
 
 const spotifavController = {};
 
@@ -76,6 +78,58 @@ spotifavController.getFavs = (req, res, next) => {
     res.locals.favSongs = songs["rows"];
     return next();
   });
+}
+
+spotifavController.getToken = (req, res, next) => {
+  // Get client id and secret key
+  const clientId = credentials.clientId;
+  const secret = credentials.clientSecret;
+
+  const spotifyApi = new SpotifyWebApi({
+    clientId: clientId,
+    clientSecret: secret
+  });
+
+  // Retrieve an access token
+  spotifyApi.clientCredentialsGrant()
+    .then(data => {
+      // console.log('The access token expires in ' + data.body['expires_in']);
+      // console.log('The access token is ' + data.body['access_token']);
+
+      // Save the access token so that it's used in future calls
+      spotifyApi.setAccessToken(data.body['access_token']);
+      res.locals.token = data.body['access_token'];
+      res.locals.spotifyApi = spotifyApi;
+      return next();
+    })
+    .catch(err => {
+      return next({
+        log: 'Express error handler caught unknown middleware error in spotifavController.getToken',
+        message: { err: 'An error occurred: ' + err }
+      });
+    });
+}
+
+spotifavController.search = (req, res, next) => {
+  // Get token and api from previous middleware
+  const authorization = res.locals.token;
+  const spotifyApi = res.locals.spotifyApi;
+  // Get query string from request query
+  const song = req.body.song;
+  const artist = req.body.artist;
+  const query = `track:${song} artist:${artist}`;
+  // Search for tracks with query string
+  spotifyApi.searchTracks(query)
+    .then(data => {
+      res.locals.track = data.body;
+      return next();
+    })
+    .catch(err => {
+      return next({
+        log: 'Express error handler caught unknown middleware error in spotifavController.search',
+        message: { err: 'An error occurred: ' + err }
+      });
+    });
 }
 
 module.exports = spotifavController;
