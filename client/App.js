@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import LoginContainer from './components/LoginContainer';
+import MainContainer from './components/MainContainer';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: false,
+      currentUser: ''
     }
     this.loginUser = this.loginUser.bind(this);
   }
@@ -20,13 +22,15 @@ class App extends Component {
     fetch('/api/login', {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'Application/JSON'
       },
       body: JSON.stringify(reqBody)
     })
-      .then(res => res.json())
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
+    .then(res => res.json())
+    .then(data => {
+      this.setState({isLoggedIn: true, currentUser: username})
+    })
+    .catch(err => console.log("Error during login:", err));
   }
 
   render() {
@@ -38,7 +42,7 @@ class App extends Component {
     // Else render web app
     } else {
       return (
-        <h1>Logged In!</h1>
+        <MainContainer currentUser={this.state.currentUser}/>
       )
     }
   }

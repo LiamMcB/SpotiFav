@@ -12,15 +12,16 @@ function LoginBox(props) {
           <circle cx="8" cy="11" r="1"/>
         </svg>
       </div>
-      <form onSubmit={loginUser} className='login-form' method="post">
+  
+      <div className='login-form'>
         <div className="form-group">
-            <input autoComplete="off" autoFocus className="form-control" name="username" placeholder="Username" type="text" id="username" />
-        </div>
-        <div className="form-group">
-            <input className="form-control" name="password" placeholder="Password" type="password" id="password" />
-        </div>
-        <button className="btn btn-success login-button d-flex justify-content-center" type="submit">Log In</button>
-      </form>
+              <input autoComplete="off" autoFocus className="form-control" name="username" placeholder="Username" type="text" id="username" />
+          </div>
+          <div className="form-group">
+              <input className="form-control" name="password" placeholder="Password" type="password" id="password" />
+          </div>
+        <button className="btn btn-success login-button d-flex justify-content-center" type="submit" onClick={loginUser}>Log In</button>
+      </div>
     </main>
   )
 }

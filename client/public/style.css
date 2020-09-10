@@ -3,7 +3,6 @@ html {
   padding: 0;
 }
 
-
 .login-box {
   margin-top: 5rem;
   height: 60vh;
@@ -24,4 +23,8 @@ html {
 .music-icon {
   height: 2rem;
   width: auto;
+}
+
+.form-control {
+  text-align: center;
 }

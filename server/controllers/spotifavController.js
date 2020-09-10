@@ -17,7 +17,7 @@ spotifavController.loginUser = (req, res, next) => {
       });
     }
     // Else login user
-    res.locals.loggedUser = user["rows"];
+    res.locals.loggedUser = user["rows"][0];
     // Set cookie to show user is logged in
     // res.cookie('user', 'loggedIn', { httpOnly: true });
     return next();

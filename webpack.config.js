@@ -27,15 +27,12 @@ module.exports = {
     ]
   },
   devServer: {
-    host: 'localhost',
-    port: 8080,
-    headers: { 'Access-Control-Allow-Origin': '*' },
     publicPath: '/build/',
     contentBase: path.join(__dirname, './client'),
     hot: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'http://localhost:3000/',
         secure: false  
       }
     }
