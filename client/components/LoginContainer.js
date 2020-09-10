@@ -3,10 +3,10 @@ import LoginNav from './LoginNav';
 import LoginBox from './LoginBox';
 
 function LoginContainer(props) {
-  const { loginUser } = props;
+  const { loginUser, signupUser } = props;
   return (
     <div>
-      <LoginNav />
+      <LoginNav signupUser={signupUser} />
       <LoginBox loginUser={loginUser}/>
     </div>
   )
