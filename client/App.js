@@ -13,6 +13,7 @@ class App extends Component {
       signingIn: false
     }
     this.loginUser = this.loginUser.bind(this);
+    this.logoutUser = this.logoutUser.bind(this);
     this.signupUser = this.signupUser.bind(this);
     this.signupInfo = this.signupInfo.bind(this);
   }
@@ -67,6 +68,11 @@ class App extends Component {
     .catch(err => console.log("Error during signup:", err));
   }
 
+  // Button on MainNav that allows user to logout
+  logoutUser() {
+    this.setState({isLoggedIn: false});
+  }
+
   render() {
     // If signing in, render signin
     if (this.state.signingIn) {
@@ -82,7 +88,7 @@ class App extends Component {
     // Else render web app
     } else {
       return (
-        <MainContainer currentUser={this.state.currentUser} userId={this.state.userId}/>
+        <MainContainer currentUser={this.state.currentUser} userId={this.state.userId} logoutUser={this.logoutUser} />
       )
     }
   }

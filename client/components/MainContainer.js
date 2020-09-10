@@ -26,7 +26,7 @@ class MainContainer extends Component {
     .then(res => res.json())
     .then(data => {
       // Push song data into favSongs array
-      this.setState(() => {
+      this.setState((                 ) => {
         const favSongs = [];
         for (let i = 0; i < data.length; i += 1) {
           let currSong = {};
@@ -44,7 +44,7 @@ class MainContainer extends Component {
   render() {
     return (
       <div>
-        <MainNav currentUser={this.props.currentUser} />
+        <MainNav currentUser={this.props.currentUser} logoutUser={this.props.logoutUser} />
         <MainBox userId={this.props.userId} favSongs={this.state.favSongs} />
       </div>
     )
