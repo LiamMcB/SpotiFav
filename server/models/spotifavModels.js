@@ -1,6 +1,7 @@
 const { Pool } = require('pg');
+const keys = require('../keys');
 
-const db_URI = 'postgres://hbozgplt:FczAL3mN1qUA7kdB7u6DRAPxIT3j8q-y@lallah.db.elephantsql.com:5432/hbozgplt';
+const db_URI = keys.db_URI;
 
 const pool = new Pool({
   connectionString: db_URI
