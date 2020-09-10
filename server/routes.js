@@ -5,14 +5,16 @@ const router = express.Router();
 
 // Verifies users login information via api/login route
 router.post('/login', spotifavController.loginUser, (req, res) => {
-  const currentUser = res.locals.currentUser;
+  console.log("error after controller")
+  const currentUser = res.locals.loggedUser;
+  console.log(currentUser);
   res.status(200);
   res.json(currentUser);
 });
 
 // Lets user signup via api/signup route
 router.post('/signup', spotifavController.signupUser, (req, res) => {
-  const currentUser = res.locals.currentUser;
+  const currentUser = res.locals.signedUser;
   res.status(200);
   res.json(currentUser);
 });

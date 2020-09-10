@@ -14,10 +14,10 @@ function LoginBox(props) {
       </div>
       <form onSubmit={loginUser} className='login-form' method="post">
         <div className="form-group">
-            <input autoComplete="off" autoFocus className="form-control" name="username" placeholder="Username" type="text" />
+            <input autoComplete="off" autoFocus className="form-control" name="username" placeholder="Username" type="text" id="username" />
         </div>
         <div className="form-group">
-            <input className="form-control" name="password" placeholder="Password" type="password" />
+            <input className="form-control" name="password" placeholder="Password" type="password" id="password" />
         </div>
         <button className="btn btn-success login-button d-flex justify-content-center" type="submit">Log In</button>
       </form>

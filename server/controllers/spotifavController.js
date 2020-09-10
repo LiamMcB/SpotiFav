@@ -17,17 +17,18 @@ spotifavController.loginUser = (req, res, next) => {
       });
     }
     // Else login user
-    res.locals.currentUser = user["rows"];
+    res.locals.loggedUser = user["rows"];
     // Set cookie to show user is logged in
-    res.cookie('user', 'loggedIn', { httpOnly: true });
+    // res.cookie('user', 'loggedIn', { httpOnly: true });
     return next();
-  })
-    .catch(err => {
-      return next({
-        log: `error in spotifavController.loginUser: ${err}`,
-        message: { err: 'An error occurred' }
-      });
   });
+  //   .catch(err => {
+  //     console.log("made it into err");
+  //     return next({
+  //       log: `error in spotifavController.loginUser: ${err}`,
+  //       message: { err: 'An error occurred' }
+  //     });
+  // });
 };
 
 spotifavController.signupUser = (req, res, next) => {
@@ -44,17 +45,17 @@ spotifavController.signupUser = (req, res, next) => {
       });
     }
     // Else sign them up
-    res.locals.currentUser = user["rows"];
+    res.locals.signedUser = user["rows"];
     // Set cookie to show they are logged in
-    res.cookie('user', 'loggedIn', { httpOnly: true });
+    // res.cookie('user', 'loggedIn', { httpOnly: true });
     return next();
-  })
-  .catch(err => {
-    return next({
-      log: `error in spotifavController.signinUser: ${err}`,
-      message: { err: 'An error occurred' }
-    });
   });
+  // .catch(err => {
+  //   return next({
+  //     log: `error in spotifavController.signinUser: ${err}`,
+  //     message: { err: 'An error occurred' }
+  //   });
+  // });
 };
 
 module.exports = spotifavController;
