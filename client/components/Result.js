@@ -11,10 +11,10 @@ function Result (props) {
     addFav(userId, songName, artistName, albumName);
   }
   return (
-    <div className='d-flex flex-row justify-content-around song-box'>
-      <div>{songName}</div>
-      <div>{artistName}</div>
-      <div>{albumName}</div>
+    <div className='container d-flex flex-row justify-content-around song-box'>
+      <div className='col'>{songName}</div>
+      <div className='col'>{artistName}</div>
+      <div className='col'>{albumName}</div>
       <button className="btn btn-outline-success" onClick={clickFav}>Add</button>
     </div>
   )

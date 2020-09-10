@@ -33,13 +33,20 @@ html {
   border: 1px solid rgb(177, 177, 177);
   border-radius: 5px;
   box-shadow: 2px 1px 1px rgb(194, 194, 194);
-  margin: 1rem;
   padding: 2rem;
+  margin: 1rem 0;
   background-color: rgb(245, 245, 245);
 }
 
 .song-box:hover {
   background-color: rgb(226, 226, 226);
+}
+
+.fav-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
 }
 
 .fav-title {
@@ -61,4 +68,8 @@ html {
 #song-search, #artist-search {
   width: 60vw;
   margin: 1rem;
+}
+
+.col {
+  text-align: center;
 }

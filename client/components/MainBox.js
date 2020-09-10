@@ -21,9 +21,9 @@ function MainBox (props) {
   return (
     <div className="main-box">
       <SearchBar searchFavs={searchFavs} />
-      {results}
+      <div className='fav-list'>{results}</div>
       <h2 className='fav-title'>Your favorite songs: </h2>
-      <div>{songList}</div>
+      <div className='fav-list'>{songList}</div>
     </div>
   )
 }

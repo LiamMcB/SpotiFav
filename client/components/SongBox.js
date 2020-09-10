@@ -11,10 +11,10 @@ function SongBox (props) {
   }
 
   return (
-    <div className='d-flex flex-row justify-content-around song-box'>
-      <div>{song}</div>
-      <div>{artist}</div>
-      <div>{album}</div>
+    <div className='container d-flex flex-row justify-content-around song-box'>
+      <div className='col'>{song}</div>
+      <div className='col'>{artist}</div>
+      <div className='col'>{album}</div>
       <button className="btn btn-outline-danger" onClick={deleteClick} >Delete</button>
     </div>
   )
