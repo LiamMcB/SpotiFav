@@ -63,7 +63,7 @@ class App extends Component {
     .then(res => res.json())
     .then(data => {
       // Render main page by changing state
-      this.setState({isLoggedIn: true, currentUser: username, signingIn: false, id: data["id"]})
+      this.setState({isLoggedIn: true, currentUser: username, signingIn: false, userId: data["id"]})
     })
     .catch(err => console.log("Error during signup:", err));
   }
