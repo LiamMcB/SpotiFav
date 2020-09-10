@@ -12,6 +12,7 @@ class MainContainer extends Component {
     this.getFavs = this.getFavs.bind(this);
     this.searchFavs = this.searchFavs.bind(this);
     this.addFav = this.addFav.bind(this);
+    this.deleteFav = this.deleteFav.bind(this);
     // Invoke getFavs so page loads with users current favs
     this.getFavs();
   }
@@ -97,6 +98,34 @@ class MainContainer extends Component {
     })
     .catch(err => console.log('Error in addFav: ' + err)); 
   }
+
+  deleteFav(user_id, song, artist) {
+    // Make request body
+    const reqBody = {user_id, song, artist};
+    // Post to server
+    fetch('/api/deletefav', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/JSON'
+      },
+      body: JSON.stringify(reqBody)
+    })
+    .then(res => res.json())
+    .then(data => {
+      // Get name of song from response
+      const deletedSong = data.song;
+      const newFavs = [];
+      // Iterate over this.state.favSongs and populate new array with all but deleted song
+      for (let i = 0; i < this.state.favSongs.length; i += 1) {
+        if (this.state.favSongs[i].song !== deletedSong) {
+          newFavs.push(this.state.favSongs[i]);
+        }
+      }
+      // Set state with new array
+      this.setState({favSongs: newFavs});
+    })
+    .catch(err => console.log('Error in deleteFav: ' + err)); 
+  }
   
   render() {
     return (
@@ -107,6 +136,7 @@ class MainContainer extends Component {
           searchFavs={this.searchFavs} 
           resultsSongs={this.state.resultsSongs} 
           addFav={this.addFav}
+          deleteFav={this.deleteFav}
         />
       </div>
     )

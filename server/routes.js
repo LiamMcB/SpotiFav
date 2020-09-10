@@ -35,6 +35,13 @@ router.post('/addfav', spotifavController.addFav, (req, res) => {
   res.status(200);
   // Respond with favorite just added
   res.json(res.locals.newFav);
+});
+
+// Lets users delete a song from their favorites
+router.post('/deletefav', spotifavController.deleteFav, (req, res) => {
+  res.status(200);
+  // Respond with song that was just deleted
+  res.json(res.locals.deleted);
 })
 
 module.exports = router;

@@ -155,4 +155,26 @@ spotifavController.addFav = (req, res, next) => {
   })
 }
 
+spotifavController.deleteFav = (req, res, next) => {
+  // Get song and artist from request body
+  const song = req.body.song;
+  const artist = req.body.artist;
+  const userId = req.body.user_id;
+  const values = [userId, song, artist];
+  // Query to delete songs from table
+  const deleteQuery = 'DELETE FROM songs WHERE (user_id=$1 AND song=$2 AND artist=$3) RETURNING *';
+  // Run query
+  db.query(deleteQuery, values, (err, song) => {
+    if (err) {
+      return next({
+        log: 'Express error handler caught unknown middleware error in spotifavController.deleteFav',
+        message: { err: 'An error occurred: ' + err }
+      })
+    }
+    // Store deleted song in res.locals
+    res.locals.deleted = song["rows"][0];
+    return next();
+  })
+}
+
 module.exports = spotifavController;
