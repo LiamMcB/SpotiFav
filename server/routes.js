@@ -17,4 +17,11 @@ router.post('/signup', spotifavController.signupUser, (req, res) => {
   res.json(currentUser);
 });
 
+// Gets current users favorite songs
+router.post('/getFavs', spotifavController.getFavs, (req, res) => {
+  const songs = res.locals.favSongs;
+  res.status(200);
+  res.json(songs);
+})
+
 module.exports = router;

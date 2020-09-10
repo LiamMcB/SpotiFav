@@ -45,7 +45,7 @@ spotifavController.signupUser = (req, res, next) => {
       });
     }
     // Else sign them up
-    res.locals.signedUser = user["rows"];
+    res.locals.signedUser = user["rows"][0];
     // Set cookie to show they are logged in
     // res.cookie('user', 'loggedIn', { httpOnly: true });
     return next();
@@ -57,5 +57,25 @@ spotifavController.signupUser = (req, res, next) => {
   //   });
   // });
 };
+
+spotifavController.getFavs = (req, res, next) => {
+  // Get user_id from request body
+  const userId = req.body.user_id;
+  // Put into values array
+  const values = [userId];
+  // Query to get all songs in songs with that user_id
+  const favsQuery = 'SELECT * FROM songs WHERE user_id = $1';
+  db.query(favsQuery, values, (err, songs) => {
+    if (err) {
+      return next({
+        log: 'Express error handler caught unknown middleware error in spotifavController.getFavs',
+        message: { err: 'An error occurred' }
+      });
+    }
+    // Get songs and store in res.locals
+    res.locals.favSongs = songs["rows"];
+    return next();
+  });
+}
 
 module.exports = spotifavController;
