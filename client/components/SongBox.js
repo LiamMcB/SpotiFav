@@ -10,7 +10,7 @@ function SongBox (props) {
     <div className='d-flex flex-row justify-content-around song-box'>
       <div>{song}</div>
       <div>{artist}</div>
-      <div>{artist}</div>
+      <div>{album}</div>
     </div>
   )
 }

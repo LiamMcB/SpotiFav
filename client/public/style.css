@@ -30,7 +30,20 @@ html {
 }
 
 .song-box {
+  border: 1px solid rgb(177, 177, 177);
+  border-radius: 5px;
+  box-shadow: 2px 1px 1px rgb(194, 194, 194);
   margin: 1rem;
+  padding: 2rem;
+  background-color: rgb(245, 245, 245);
+}
+
+.song-box:hover {
+  background-color: rgb(226, 226, 226);
+}
+
+.fav-title {
+  margin: 0.5rem;
 }
 
 .searchbar {

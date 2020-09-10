@@ -28,7 +28,7 @@ class MainContainer extends Component {
     .then(res => res.json())
     .then(data => {
       // Push song data into favSongs array
-      this.setState((                 ) => {
+      this.setState(() => {
         const favSongs = [];
         for (let i = 0; i < data.length; i += 1) {
           let currSong = {};
@@ -58,7 +58,19 @@ class MainContainer extends Component {
       body: JSON.stringify(reqBody)
     })
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => {
+      console.log(data);
+      // Get album name, artist, and songname
+      const album = data.tracks.items[0].album.name;
+      const artistName = data.tracks.items[0].artists[0].name;
+      const songName = data.tracks.items[0].name;
+      const songInfo = {songName, artistName, album};
+      this.setState(state => {
+        const newResults = [songInfo];
+        return {resultsSongs: newResults};
+      });
+      console.log(this.state.resultsSongs);
+    })
     .catch(err => console.log('Error in search: ' + err)); 
   }
   
