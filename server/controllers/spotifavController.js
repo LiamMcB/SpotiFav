@@ -132,4 +132,27 @@ spotifavController.search = (req, res, next) => {
     });
 }
 
+spotifavController.addFav = (req, res, next) => {
+  // Get song from request body
+  const song = req.body.song;
+  const artist = req.body.artist;
+  const album = req.body.album;
+  const userId = req.body.user_id;
+  const values = [userId, song, artist, album];
+  // Query to add to songs table
+  const addQuery = 'INSERT INTO songs(user_id, song, artist, album) VALUES($1, $2, $3, $4) RETURNING *';
+  // Add to table
+  db.query(addQuery, values, (err, song) => {
+    if (err) {
+      return next({
+        log: 'Express error handler caught unknown middleware error in spotifavController.addFav',
+        message: { err: 'An error occurred: ' + err }
+      })
+    }
+    // Store new song in res.locals
+    res.locals.newFav = song["rows"][0];
+    return next();
+  })
+}
+
 module.exports = spotifavController;

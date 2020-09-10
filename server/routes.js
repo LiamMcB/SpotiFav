@@ -22,12 +22,19 @@ router.post('/getFavs', spotifavController.getFavs, (req, res) => {
   const songs = res.locals.favSongs;
   res.status(200);
   res.json(songs);
-})
+});
 
 // Gets songs using Spotify's Web API
 router.post('/search', spotifavController.getToken, spotifavController.search, (req, res) => {
   res.status(200);
   res.json(res.locals.track);
+});
+
+// Allows user to add song to favorites
+router.post('/addfav', spotifavController.addFav, (req, res) => {
+  res.status(200);
+  // Respond with favorite just added
+  res.json(res.locals.newFav);
 })
 
 module.exports = router;

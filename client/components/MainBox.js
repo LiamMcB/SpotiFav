@@ -4,7 +4,7 @@ import SearchBar from './SearchBar';
 import Result from './Result';
 
 function MainBox (props) {
-  const { userId, favSongs, searchFavs, resultsSongs } = props;
+  const { userId, favSongs, searchFavs, resultsSongs, addFav } = props;
   
   // Iterate over favSongs and create dom elements for each
   const songList = [];
@@ -15,7 +15,7 @@ function MainBox (props) {
   // Iterate pver resultsSongs and create el for each
   const results = [];
   for (let j = 0; j < resultsSongs.length; j += 1) {
-    results.push(<Result songInfo={resultsSongs[j]} />)
+    results.push(<Result songInfo={resultsSongs[j]} addFav={addFav} userId={userId} />)
   }
 
   return (

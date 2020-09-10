@@ -11,6 +11,8 @@ class MainContainer extends Component {
     }
     this.getFavs = this.getFavs.bind(this);
     this.searchFavs = this.searchFavs.bind(this);
+    this.addFav = this.addFav.bind(this);
+    // Invoke getFavs so page loads with users current favs
     this.getFavs();
   }
 
@@ -59,7 +61,7 @@ class MainContainer extends Component {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data.tracks.items);
+      // console.log(data.tracks.items);
       // Get album name, artist, and songname
       // const album = data.tracks.items[0].album.name;
       // const artistName = data.tracks.items[0].artists[0].name;
@@ -73,12 +75,39 @@ class MainContainer extends Component {
     })
     .catch(err => console.log('Error in search: ' + err)); 
   }
+
+  addFav(user_id, song, artist, album) {
+    // Make request body for post
+    const reqBody = {user_id, song, artist, album};
+    // Post to server
+    fetch('/api/addfav', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/JSON'
+      },
+      body: JSON.stringify(reqBody)
+    })
+    .then(res => res.json())
+    .then(data => {
+      // Clear results songs
+      const newResults = [];
+      // Add to favSongs
+      const newFavs = [...this.state.favSongs, {song:data.song, artist:data.artist, album:data.album}];
+      this.setState({resultsSongs: newResults, favSongs: newFavs});
+    })
+    .catch(err => console.log('Error in addFav: ' + err)); 
+  }
   
   render() {
     return (
       <div>
         <MainNav currentUser={this.props.currentUser} logoutUser={this.props.logoutUser} />
-        <MainBox userId={this.props.userId} favSongs={this.state.favSongs} searchFavs={this.searchFavs} resultsSongs={this.state.resultsSongs} />
+        <MainBox userId={this.props.userId} 
+          favSongs={this.state.favSongs} 
+          searchFavs={this.searchFavs} 
+          resultsSongs={this.state.resultsSongs} 
+          addFav={this.addFav}
+        />
       </div>
     )
   }
