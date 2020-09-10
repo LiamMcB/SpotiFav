@@ -6,7 +6,8 @@ class MainContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      favSongs: []
+      favSongs: [],
+      resultsSongs: []
     }
     this.getFavs = this.getFavs.bind(this);
     this.searchFavs = this.searchFavs.bind(this);
@@ -65,7 +66,7 @@ class MainContainer extends Component {
     return (
       <div>
         <MainNav currentUser={this.props.currentUser} logoutUser={this.props.logoutUser} />
-        <MainBox userId={this.props.userId} favSongs={this.state.favSongs} searchFavs={this.searchFavs} />
+        <MainBox userId={this.props.userId} favSongs={this.state.favSongs} searchFavs={this.searchFavs} resultsSongs={this.state.resultsSongs} />
       </div>
     )
   }
