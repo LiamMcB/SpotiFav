@@ -43,7 +43,22 @@ class MainContainer extends Component {
   }
 
   searchFavs() {
-    console.log("made it into searchFavs")
+    // Get song and artist from search
+    const song = document.getElementById('song-search').value;
+    const artist = document.getElementById('artist-search').value;
+    // Put into request body
+    const reqBody = {song, artist};
+    // Fetch from server
+    fetch('/api/search', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/JSON'
+      },
+      body: JSON.stringify(reqBody)
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.log('Error in search: ' + err)); 
   }
   
   render() {
