@@ -10,7 +10,8 @@ class App extends Component {
       isLoggedIn: false,
       currentUser: '',
       userId: '',
-      signingIn: false
+      signingIn: false,
+      signupMessage: ''
     }
     this.loginUser = this.loginUser.bind(this);
     this.logoutUser = this.logoutUser.bind(this);
@@ -70,10 +71,10 @@ class App extends Component {
     .then(data => {
       if (!data.err) {
         // Render main page by changing state
-        this.setState({isLoggedIn: true, currentUser: username, signingIn: false, userId: data["id"]})
+        this.setState({isLoggedIn: true, currentUser: username, signingIn: false, userId: data["id"], signupMessage: ''})
       } else {
-        // Alert user that username is taken
-        alert("That username is taken. Try another one!")
+        // Change state to add text to the page to notify user that name is taken
+        this.setState({signupMessage: 'That username is taken. Try another one!' })
       }
     })
     .catch(err => console.log("Error during signup:", err));
@@ -88,7 +89,7 @@ class App extends Component {
     // If signing in, render signin
     if (this.state.signingIn) {
       return (
-        <SigninContainer signupUser={this.signupUser} signupInfo={this.signupInfo} />
+        <SigninContainer signupUser={this.signupUser} signupInfo={this.signupInfo} signupMessage={this.state.signupMessage} />
       )
     }
     // If not logged in, render login page

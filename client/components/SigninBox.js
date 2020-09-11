@@ -1,7 +1,7 @@
 import React from 'react';
 
 function SigninBox(props) {
-  const { signupInfo } = props;
+  const { signupInfo, signupMessage } = props;
   return (
     <main className='login-box'>
       <div className='login d-flex justify-content-center align-items-center'>
@@ -16,6 +16,7 @@ function SigninBox(props) {
               <input className="form-control" name="password" placeholder="Password" type="password" id="signin-password" />
           </div>
         <button className="btn btn-success login-button d-flex justify-content-center" type="submit" onClick={signupInfo}>Click to Signup</button>
+        <div className="font-italic text-danger text-center m-2">{signupMessage}</div>
       </div>
     </main>
   )
