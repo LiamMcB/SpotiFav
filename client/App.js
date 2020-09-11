@@ -35,7 +35,13 @@ class App extends Component {
     })
     .then(res => res.json())
     .then(data => {
-      this.setState({isLoggedIn: true, currentUser: username, userId: data["id"]})
+      // If not error, change state
+      if (!data.err) {
+        this.setState({isLoggedIn: true, currentUser: username, userId: data["id"]})
+      } else {
+        // Redirect user to signup
+        this.signupUser();
+      }
     })
     .catch(err => console.log("Error during login:", err));
   }
@@ -62,8 +68,13 @@ class App extends Component {
     })
     .then(res => res.json())
     .then(data => {
-      // Render main page by changing state
-      this.setState({isLoggedIn: true, currentUser: username, signingIn: false, userId: data["id"]})
+      if (!data.err) {
+        // Render main page by changing state
+        this.setState({isLoggedIn: true, currentUser: username, signingIn: false, userId: data["id"]})
+      } else {
+        // Alert user that username is taken
+        alert("That username is taken. Try another one!")
+      }
     })
     .catch(err => console.log("Error during signup:", err));
   }
